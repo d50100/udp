@@ -170,7 +170,7 @@ void ikcp_allocator(void* (*new_malloc)(size_t), void (*new_free)(void*))
 }
 
 // allocate a new kcp segment
-static IKCPSEG* ikcp_segment_new(ikcpcb *kcp, int size)
+static IKCPSEG* ikcp_segment_new(ikcpcb *kcp, int size) // kcp 指针参数的作用是什么?
 {
 	return (IKCPSEG*)ikcp_malloc(sizeof(IKCPSEG) + size);
 }
