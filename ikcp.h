@@ -269,7 +269,7 @@ struct IKCPSEG
 	struct IQUEUEHEAD node;
 	IUINT32 conv;
 	IUINT32 cmd;
-	IUINT32 frg;
+	IUINT32 frg;  // 分片编号，表示倒数第几个分片; 如果是stream,  frg 为0
 	IUINT32 wnd;
 	IUINT32 ts;
 	IUINT32 sn;
