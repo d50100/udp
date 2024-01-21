@@ -477,7 +477,7 @@ int ikcp_send(ikcpcb *kcp, const char *buffer, int len)
 
 	// append to previous segment in streaming mode (if possible)
 	if (kcp->stream != 0) {
-		if (!iqueue_is_empty(&kcp->snd_queue)) {
+		if (!iqueue_is_empty(&kcp->snd_queue)) {  // 将 snd_queue 中的最后一个old segment的len 补齐到  (mss, old->len + len)
 			IKCPSEG *old = iqueue_entry(kcp->snd_queue.prev, IKCPSEG, node);
 			if (old->len < kcp->mss) {
 				int capacity = kcp->mss - old->len;
