@@ -438,7 +438,7 @@ int ikcp_recv(ikcpcb *kcp, char *buffer, int len)
 //---------------------------------------------------------------------
 // peek data size
 //---------------------------------------------------------------------
-int ikcp_peeksize(const ikcpcb *kcp)
+int ikcp_peeksize(const ikcpcb *kcp)   // 接受队列 所有元素 长度的总和
 {
 	struct IQUEUEHEAD *p;
 	IKCPSEG *seg;
