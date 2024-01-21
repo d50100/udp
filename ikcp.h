@@ -274,7 +274,7 @@ struct IKCPSEG
 	IUINT32 ts;
 	IUINT32 sn;
 	IUINT32 una;
-	IUINT32 len;
+	IUINT32 len;   // 当前segment的数据的长度，不包括头部字段
 	IUINT32 resendts;
 	IUINT32 rto;
 	IUINT32 fastack;
