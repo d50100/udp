@@ -466,7 +466,7 @@ int ikcp_peeksize(const ikcpcb *kcp)
 //---------------------------------------------------------------------
 // user/upper level send, returns below zero for error
 //---------------------------------------------------------------------
-int ikcp_send(ikcpcb *kcp, const char *buffer, int len)
+int ikcp_send(ikcpcb *kcp, const char *buffer, int len)  // 提供给上层的 可靠数据传输  rdt_send
 {
 	IKCPSEG *seg;
 	int count, i;
