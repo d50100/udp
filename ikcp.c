@@ -961,7 +961,7 @@ void ikcp_flush(ikcpcb *kcp)
 	seg.ts = 0;
 
 	// flush acknowledges
-	count = kcp->ackcount;
+	count = kcp->ackcount;  // 收到服务器端对当前端的发送包的确认的个数
 	for (i = 0; i < count; i++) {
 		size = (int)(ptr - buffer);
 		if (size + (int)IKCP_OVERHEAD > (int)kcp->mtu) {
@@ -969,7 +969,7 @@ void ikcp_flush(ikcpcb *kcp)
 			ptr = buffer;
 		}
 		ikcp_ack_get(kcp, i, &seg.sn, &seg.ts);
-		ptr = ikcp_encode_seg(ptr, &seg);
+		ptr = ikcp_encode_seg(ptr, &seg);  // 根据确认， 从 kcp->buffer 中 取出 seg
 	}
 
 	kcp->ackcount = 0;
