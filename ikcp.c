@@ -658,7 +658,7 @@ static void ikcp_ack_push(ikcpcb *kcp, IUINT32 sn, IUINT32 ts)
 			abort();
 		}
 
-		if (kcp->acklist != NULL) {
+		if (kcp->acklist != NULL) {  // 在扩容的过程中，将原有的 kcp->acklist 的数据 移动到新的 acklist 中
 			IUINT32 x;
 			for (x = 0; x < kcp->ackcount; x++) {
 				acklist[x * 2 + 0] = kcp->acklist[x * 2 + 0];
