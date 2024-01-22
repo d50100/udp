@@ -938,7 +938,7 @@ static int ikcp_wnd_unused(const ikcpcb *kcp)
 void ikcp_flush(ikcpcb *kcp)
 {
 	IUINT32 current = kcp->current;
-	char *buffer = kcp->buffer;
+	char *buffer = kcp->buffer;  // buffer 是要传给 ikcp_output 的数据
 	char *ptr = buffer;
 	int count, size, i;
 	IUINT32 resent, cwnd;
