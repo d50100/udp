@@ -464,7 +464,7 @@ int ikcp_peeksize(const ikcpcb *kcp)   // 接受队列 所有元素 长度的总
 
 
 //---------------------------------------------------------------------
-// user/upper level send, returns below zero for error
+// user/upper level send, returns below zero for error    [ikcp_send -> ikcp_update -> ikcp_output]
 //---------------------------------------------------------------------
 int ikcp_send(ikcpcb *kcp, const char *buffer, int len)  // 提供给上层的 可靠数据传输  rdt_send
 {
