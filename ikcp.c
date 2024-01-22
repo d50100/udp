@@ -355,7 +355,7 @@ void ikcp_setoutput(ikcpcb *kcp, int (*output)(const char *buf, int len,
 //---------------------------------------------------------------------
 // user/upper level recv: returns size, returns below zero for EAGAIN
 //---------------------------------------------------------------------
-int ikcp_recv(ikcpcb *kcp, char *buffer, int len)
+int ikcp_recv(ikcpcb *kcp, char *buffer, int len)   // ikcp_recv(kcp2, buffer, 10);   参数 buffer,10 是上层用户传递进来的，用于存储数据
 {
 	struct IQUEUEHEAD *p;
 	int ispeek = (len < 0)? 1 : 0;
@@ -369,7 +369,7 @@ int ikcp_recv(ikcpcb *kcp, char *buffer, int len)
 
 	if (len < 0) len = -len;
 
-	peeksize = ikcp_peeksize(kcp);
+	peeksize = ikcp_peeksize(kcp);  // 看一下 kcp 的 rcv_queue 有多少的数据
 
 	if (peeksize < 0) 
 		return -2;
