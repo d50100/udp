@@ -411,7 +411,7 @@ int ikcp_recv(ikcpcb *kcp, char *buffer, int len)   // ikcp_recv(kcp2, buffer, 1
 	assert(len == peeksize);
 
 	// move available data from rcv_buf -> rcv_queue
-	while (! iqueue_is_empty(&kcp->rcv_buf)) {
+	while (! iqueue_is_empty(&kcp->rcv_buf)) {  // rcv_queue 又空了一些，尝试继续从 rcv_buf 移动到 rcv_queue
 		seg = iqueue_entry(kcp->rcv_buf.next, IKCPSEG, node);
 		if (seg->sn == kcp->rcv_nxt && kcp->nrcv_que < kcp->rcv_wnd) {
 			iqueue_del(&seg->node);
