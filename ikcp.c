@@ -353,7 +353,7 @@ void ikcp_setoutput(ikcpcb *kcp, int (*output)(const char *buf, int len,
 
 
 //---------------------------------------------------------------------
-// user/upper level recv: returns size, returns below zero for EAGAIN
+// user/upper level recv: returns size, returns below zero for EAGAIN     [ ikcp_input -> ikcp_update -> ikcp_recv ]
 //---------------------------------------------------------------------
 int ikcp_recv(ikcpcb *kcp, char *buffer, int len)   // ikcp_recv(kcp2, buffer, 10);   参数 buffer,10 是上层用户传递进来的，用于存储数据
 {
