@@ -1029,7 +1029,7 @@ void ikcp_flush(ikcpcb *kcp)
 		IKCPSEG *newseg;
 		if (iqueue_is_empty(&kcp->snd_queue)) break;
 
-		newseg = iqueue_entry(kcp->snd_queue.next, IKCPSEG, node);
+		newseg = iqueue_entry(kcp->snd_queue.next, IKCPSEG, node);  // 把 snd_queue 上的数据移动到 snd_buf 上面
 
 		iqueue_del(&newseg->node);
 		iqueue_add_tail(&newseg->node, &kcp->snd_buf);
