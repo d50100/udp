@@ -305,7 +305,7 @@ struct IKCPCB
 	struct IQUEUEHEAD rcv_buf;
 	IUINT32 *acklist;
 	IUINT32 ackcount;
-	IUINT32 ackblock;
+	IUINT32 ackblock;  // acklist 的大小
 	void *user;
 	char *buffer;
 	int fastresend;
