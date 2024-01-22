@@ -650,7 +650,7 @@ static void ikcp_ack_push(ikcpcb *kcp, IUINT32 sn, IUINT32 ts)
 		IUINT32 *acklist;
 		IUINT32 newblock;
 
-		for (newblock = 8; newblock < newsize; newblock <<= 1);
+		for (newblock = 8; newblock < newsize; newblock <<= 1);  // newblock 取 8,16,32,64,... 在这些值中取第一个大于 newsize 的值
 		acklist = (IUINT32*)ikcp_malloc(newblock * sizeof(IUINT32) * 2);
 
 		if (acklist == NULL) {
