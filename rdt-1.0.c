@@ -27,7 +27,8 @@ void udt_send(int fd, char* packet, UINT32 len){
 
 void udt_recv(int fd, char* packet, UINT32* len){
     // 调用 下层 提供的不可靠的服务
-    recvfrom(fd, packet, *len, 0);
+    UINT32 n = recvfrom(fd, packet, *len, 0);
+    *len = n;
 }
 
 void make_pkt(char* packet, UINT32* packet_length, char* data, UINT32 data_len){
@@ -57,10 +58,13 @@ void rdt_send(int fd, char* data, UINT32 data_len) {
     udt_send(fd, packet, packet_length);
 }
 
+void extract_pkt(char* packet, UINT32 packet_length, char* data, UINT32 *data_len){
 
-void rdt_recv(int fd, char* data, UINT32 *data_len){
-    char packet[1400] = {0};
-    udt_recv(fd, packet, sizeof(packet));
+    // assert (packet_length > sizeof(PROTO_HEADER));
+    if (packet_length <= sizeof(PROTO_HEADER)){
+        data_len = 0;
+        return;
+    }
 
     PROTO_HEADER proto_header;
     memset(&proto_header, 0, sizeof(PROTO_HEADER));
@@ -71,7 +75,24 @@ void rdt_recv(int fd, char* data, UINT32 *data_len){
 
     // 根据 proto_header.cmd 做不同的业务
     data_len = proto_header.len;
+
+    // assert (data_len <= packet_length - sizeof(PROTO_HEADER));
+    if (data_len > packet_length - sizeof(PROTO_HEADER)){
+        data_len = packet_length - sizeof(PROTO_HEADER);
+    }
+
     memcpy(data, ptr, data_len);
+}
+
+void rdt_recv(int fd, char* data, UINT32 *data_len){
+    char packet[1400] = {0};
+    UINT32 packet_length = sizeof(packet);
+
+    // 使用下层的服务接受数据
+    udt_recv(fd, packet, &packet_length);
+
+    // 解包
+    extract_pkt(packet, packet_length, data, data_len);
 }
 
 void sender(){
