@@ -31,12 +31,12 @@ void udt_recv(int fd, char* packet, UINT32* len){
 }
 
 void make_pkt(char* packet, UINT32* packet_length, char* data, UINT32 data_len){
-    // todo 将头部字段填充到 packet
+    // 将头部字段填充到 packet
     PROTO_HEADER proto_header;
     memset(&proto_header, 0, sizeof(PROTO_HEADER));
     char* pos = packet;
 
-    // todo 协议字段填充
+    // todo (1) 协议字段填充
     pos = encode_proto_header(packet, &proto_header);
 
     // payload 填充
@@ -66,7 +66,7 @@ void rdt_recv(int fd, char* data, UINT32 *data_len){
     memset(&proto_header, 0, sizeof(PROTO_HEADER));
 
     char *ptr = packet;
-    // todo (1) 解封装
+    // todo (2) 解封装
     ptr = decode_proto_header(ptr, &proto_header);
 
     // 根据 proto_header.cmd 做不同的业务
