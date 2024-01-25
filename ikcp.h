@@ -275,10 +275,10 @@ struct IKCPSEG
 	IUINT32 sn;    // 报文编号
 	IUINT32 una;  // un-ack 发送方的接收缓冲区中最小还未收到的报文段的编号. 也就是说, 编号比它小的报文段都已全部接收
 	IUINT32 len;   // 数据段长度
-	IUINT32 resendts;
-	IUINT32 rto;
-	IUINT32 fastack;
-	IUINT32 xmit;
+	IUINT32 resendts;  /* 重传时间戳. 超过这个时间表示该报文超时, 需要重传. */
+	IUINT32 rto;       /* 该报文的 RTO */
+	IUINT32 fastack;   /* ACK 失序次数. 也就是 KCP Readme 中所说的 “跳过” 次数. */
+	IUINT32 xmit;      /* 该报文传输的次数 */
 	char data[1];
 };
 
