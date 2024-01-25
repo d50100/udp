@@ -271,7 +271,7 @@ struct IKCPSEG
 	IUINT32 cmd;   // IKCP_CMD_PUSH, IKCP_CMD_ACK, IKCP_CMD_WASK, IKCP_CMD_WINS
 	IUINT32 frg;   // 分片数量. 表示随后还有多少个报文属于同一个包
 	IUINT32 wnd;   // 发送方剩余接收窗口的大小
-	IUINT32 ts;    // 时间戳 
+	IUINT32 ts;    // 时间戳  [可以用来估算 RTT (Round-Trip Time, 往返时间), 从而计算出 RTO (Retransmission TimeOut, 重传超时时间).]
 	IUINT32 sn;    // 报文编号
 	IUINT32 una;  // un-ack 发送方的接收缓冲区中最小还未收到的报文段的编号. 也就是说, 编号比它小的报文段都已全部接收
 	IUINT32 len;   // 数据段长度
