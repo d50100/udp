@@ -288,7 +288,7 @@ struct IKCPSEG
 //---------------------------------------------------------------------
 struct IKCPCB
 {
-	IUINT32 conv, mtu, mss, state;
+	IUINT32 conv, mtu, mss, state;   // conv 标识这个 KCP 连接
 	IUINT32 snd_una, snd_nxt, rcv_nxt;
 	IUINT32 ts_recent, ts_lastack, ssthresh;
 	IINT32 rx_rttval, rx_srtt, rx_rto, rx_minrto;
