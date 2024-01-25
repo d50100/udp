@@ -1015,7 +1015,7 @@ void ikcp_flush(ikcpcb *kcp)
 			ikcp_output(kcp, buffer, size);
 			ptr = buffer;
 		}
-		ptr = ikcp_encode_seg(ptr, &seg); // 构造 ACK 发送给对端，表示已经收到
+		ptr = ikcp_encode_seg(ptr, &seg); // 构造 ACK 发送给对端，表示已经收到来自对方的数据报文
 	}
 
 	kcp->probe = 0;
