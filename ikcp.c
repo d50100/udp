@@ -1302,5 +1302,5 @@ IUINT32 ikcp_getconv(const void *ptr)
 	ikcp_decode32u((const char*)ptr, &conv);
 	return conv;
 }
-
+/* 源码解析 参考： https://luyuhuang.tech/2020/12/09/kcp.html */ 
 
