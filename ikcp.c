@@ -796,7 +796,7 @@ int ikcp_input(ikcpcb *kcp, const char *data, long size)
 		ikcp_parse_una(kcp, una);
 		ikcp_shrink_buf(kcp); 
 
-		if (cmd == IKCP_CMD_ACK) {
+		if (cmd == IKCP_CMD_ACK) {   // 如果是 ACK 报文, 就将相应的报文标记为已送达
 			if (_itimediff(kcp->current, ts) >= 0) {
 				ikcp_update_ack(kcp, _itimediff(kcp->current, ts));
 			}
@@ -826,8 +826,8 @@ int ikcp_input(ikcpcb *kcp, const char *data, long size)
 					(long)kcp->rx_rto);
 			}
 		}
-		else if (cmd == IKCP_CMD_PUSH) {
-			if (ikcp_canlog(kcp, IKCP_LOG_IN_DATA)) {
+		else if (cmd == IKCP_CMD_PUSH) {   // 如果是数据报文, 就将它放入 rcv_buf, 然后将 rcv_buf 中顺序正确的报文移入 rcv_queue
+			if (ikcp_canlog(kcp, IKCP_LOG_IN_DATA)) {   // 接着将相关信息插入 ACK 列表, 在稍后的 ikcp_flush 调用中会发送相应的 ACK
 				ikcp_log(kcp, IKCP_LOG_IN_DATA, 
 					"input psh: sn=%lu ts=%lu", (unsigned long)sn, (unsigned long)ts);
 			}
