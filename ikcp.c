@@ -597,7 +597,7 @@ static void ikcp_parse_ack(ikcpcb *kcp, IUINT32 sn)
 	}
 }
 
-static void ikcp_parse_una(ikcpcb *kcp, IUINT32 una)
+static void ikcp_parse_una(ikcpcb *kcp, IUINT32 una)  // 根据确认 un-ack 的值，将发送缓冲区中，seg->sn 小于这个值的 pkt (seg) 删除
 {
 	struct IQUEUEHEAD *p, *next;
 	for (p = kcp->snd_buf.next; p != &kcp->snd_buf; p = next) {
