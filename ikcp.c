@@ -1120,7 +1120,7 @@ void ikcp_flush(ikcpcb *kcp)
 		ikcp_output(kcp, buffer, size);
 	}
 
-	// update ssthresh
+	// update ssthresh   根据丢包情况计算 ssthresh 和 cwnd
 	if (change) {
 		IUINT32 inflight = kcp->snd_nxt - kcp->snd_una;
 		kcp->ssthresh = inflight / 2;
