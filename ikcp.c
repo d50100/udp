@@ -1101,7 +1101,7 @@ void ikcp_flush(ikcpcb *kcp)
 				ptr = buffer;
 			}
 
-			ptr = ikcp_encode_seg(ptr, segment);
+			ptr = ikcp_encode_seg(ptr, segment);  // 将 snd_buf 中满足条件的报文段都发送出去
 
 			if (segment->len > 0) {
 				memcpy(ptr, segment->data, segment->len);
