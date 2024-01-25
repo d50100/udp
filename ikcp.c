@@ -794,14 +794,14 @@ int ikcp_input(ikcpcb *kcp, const char *data, long size)
 
 		kcp->rmt_wnd = wnd;
 		ikcp_parse_una(kcp, una);
-		ikcp_shrink_buf(kcp);
+		ikcp_shrink_buf(kcp); 
 
 		if (cmd == IKCP_CMD_ACK) {
 			if (_itimediff(kcp->current, ts) >= 0) {
 				ikcp_update_ack(kcp, _itimediff(kcp->current, ts));
 			}
 			ikcp_parse_ack(kcp, sn);   // 删除发送缓冲区已经确认的数据  （发送窗口后沿向前移动）
-			ikcp_shrink_buf(kcp);
+			ikcp_shrink_buf(kcp);  // 发送窗口紧缩
 			if (flag == 0) {
 				flag = 1;
 				maxack = sn;
