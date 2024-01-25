@@ -800,7 +800,7 @@ int ikcp_input(ikcpcb *kcp, const char *data, long size)
 			if (_itimediff(kcp->current, ts) >= 0) {
 				ikcp_update_ack(kcp, _itimediff(kcp->current, ts));
 			}
-			ikcp_parse_ack(kcp, sn);
+			ikcp_parse_ack(kcp, sn);   // 删除发送缓冲区已经确认的数据  （发送窗口后沿向前移动）
 			ikcp_shrink_buf(kcp);
 			if (flag == 0) {
 				flag = 1;
