@@ -969,7 +969,7 @@ void ikcp_flush(ikcpcb *kcp)
 			ptr = buffer;
 		}
 		ikcp_ack_get(kcp, i, &seg.sn, &seg.ts);
-		ptr = ikcp_encode_seg(ptr, &seg);  // 根据确认， 从 kcp->buffer 中 取出 seg
+		ptr = ikcp_encode_seg(ptr, &seg);  // 发送 ACK 列表中所有的 ACK
 	}
 
 	kcp->ackcount = 0;
@@ -1001,7 +1001,7 @@ void ikcp_flush(ikcpcb *kcp)
 		seg.cmd = IKCP_CMD_WASK;
 		size = (int)(ptr - buffer);
 		if (size + (int)IKCP_OVERHEAD > (int)kcp->mtu) {
-			ikcp_output(kcp, buffer, size);
+			ikcp_output(kcp, buffer, size);  // 发送窗口探测报文
 			ptr = buffer;
 		}
 		ptr = ikcp_encode_seg(ptr, &seg);
@@ -1015,7 +1015,7 @@ void ikcp_flush(ikcpcb *kcp)
 			ikcp_output(kcp, buffer, size);
 			ptr = buffer;
 		}
-		ptr = ikcp_encode_seg(ptr, &seg); // 构造 ACK 发送给对端，表示已经收到来自对方的数据报文
+		ptr = ikcp_encode_seg(ptr, &seg); // 
 	}
 
 	kcp->probe = 0;
