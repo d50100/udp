@@ -273,7 +273,7 @@ struct IKCPSEG
 	IUINT32 wnd;
 	IUINT32 ts;
 	IUINT32 sn;
-	IUINT32 una;
+	IUINT32 una;  // 发送方的接收缓冲区中最小还未收到的报文段的编号. 也就是说, 编号比它小的报文段都已全部接收
 	IUINT32 len;
 	IUINT32 resendts;
 	IUINT32 rto;
