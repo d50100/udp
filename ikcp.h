@@ -262,19 +262,19 @@ typedef struct IQUEUEHEAD iqueue_head;
 
 
 //=====================================================================
-// SEGMENT
+// SEGMENT  [conv, cmd, frg, wnd, ts, sn, una, len, data]
 //=====================================================================
 struct IKCPSEG
 {
 	struct IQUEUEHEAD node;
-	IUINT32 conv;
-	IUINT32 cmd;
-	IUINT32 frg;  // 分片编号，表示倒数第几个分片; 如果是stream,  frg 为0
-	IUINT32 wnd;
-	IUINT32 ts;
-	IUINT32 sn;
-	IUINT32 una;
-	IUINT32 len;   // 当前segment的数据的长度，不包括头部字段
+	IUINT32 conv;  
+	IUINT32 cmd;   // IKCP_CMD_PUSH, IKCP_CMD_ACK, IKCP_CMD_WASK, IKCP_CMD_WINS
+	IUINT32 frg;   // 分片数量. 表示随后还有多少个报文属于同一个包
+	IUINT32 wnd;   // 发送方剩余接收窗口的大小
+	IUINT32 ts;    // 时间戳 
+	IUINT32 sn;    // 报文编号
+	IUINT32 una;  // un-ack 发送方的接收缓冲区中最小还未收到的报文段的编号. 也就是说, 编号比它小的报文段都已全部接收
+	IUINT32 len;   // 数据段长度
 	IUINT32 resendts;
 	IUINT32 rto;
 	IUINT32 fastack;
